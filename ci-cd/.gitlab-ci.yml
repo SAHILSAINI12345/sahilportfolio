@@ -1,0 +1,20 @@
+stages:
+  - build
+  - deploy
+
+build_job:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - echo "Build image and push to registry (example)"
+  only:
+    - main
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "kubectl apply -f kubernetes/"
+  only:
+    - main
